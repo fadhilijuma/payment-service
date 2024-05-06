@@ -77,7 +77,7 @@ We have a function that simply waits for 10 seconds and then fires:
     }
 ```
 
-This is the function that simply mocks the acquirer and either APPROVES or DECLINES the transaction.
+This is the function that simply mocks the acquirer and either APPROVES or DECLINES the transaction based on if the last digit of the card number is even or not.
 
 ```java
    private Either<PaymentCommandError, List<PaymentEvent>> handleUpdate(

@@ -77,7 +77,7 @@ We have a function that simply waits for 10 seconds and then fires:
     }
 ```
 
-I wish to mention this function that simply mocks the acquirer and either APPROVES or DECLINES the transaction.
+This is the function that simply mocks the acquirer and either APPROVES or DECLINES the transaction.
 
 ```java
    private Either<PaymentCommandError, List<PaymentEvent>> handleUpdate(
@@ -94,4 +94,4 @@ I wish to mention this function that simply mocks the acquirer and either APPROV
         }
     }
 ```
-I am using Either from vavr library which either returns valid response in right side or error on left side.
+We are using the Either Monad from [vavr](https://github.com/vavr-io/vavr) library which keeps the valid response on the Right side and error on Left side.

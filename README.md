@@ -1,6 +1,5 @@
 # Payments Service
 <img src="https://github.com/fadhilijuma/payment-service/raw/main/funds_transfer.png" >
-----
 
 This service links the white labeled service providers with acquirers ensuring a seamless flow of transactions. 
 

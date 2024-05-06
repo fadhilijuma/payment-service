@@ -1,0 +1,48 @@
+POST http://localhost:8080/v1/payments
+Content-Type: application/json
+
+{
+  "cardNumber": "4987050011059239",
+  "expiryDate": "12/25",
+  "cvv": "123",
+  "amount": 200.0,
+  "currency": "USD",
+  "merchantId": "merchant13"
+}
+
+
+###
+
+GET http://localhost:8080/v1/payments/fe8caabe-5f3e-3cae-8dc1-3db3b8efd8f0
+
+###
+
+POST  http://localhost:8080/v1/payments/acquirer
+Content-Type: application/json
+
+{
+  "cardNumber": "4987050011059239",
+  "expiryDate": "12/25",
+  "cvv": "123",
+  "amount": 200.0,
+  "currency": "USD",
+  "merchantId": "merchant13",
+  "paymentId": "a81a4e38-cb33-369c-84d9-bddc53e3341c",
+  "status": "APPROVED"
+}
+
+###
+
+POST  http://localhost:8080/v1/payments/acquirer
+Content-Type: application/json
+
+{
+  "cardNumber": "4987050011059239",
+  "expiryDate": "12/25",
+  "cvv": "123",
+  "amount": 200.0,
+  "currency": "USD",
+  "merchantId": "merchant13",
+  "paymentId": "a81a4e38-cb33-369c-84d9-bddc53e3341c",
+  "status": "DENIED"
+}

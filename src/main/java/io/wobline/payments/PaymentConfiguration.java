@@ -10,7 +10,9 @@ import io.wobline.payments.application.projection.ProjectionLauncher;
 import io.wobline.payments.base.domain.Clock;
 import io.wobline.payments.domain.PaymentEvent;
 import io.wobline.payments.infrastructure.InMemoryPaymentViewRepository;
+
 import javax.sql.DataSource;
+
 import org.apache.pekko.actor.typed.ActorSystem;
 import org.apache.pekko.actor.typed.SpawnProtocol;
 import org.apache.pekko.cluster.sharding.typed.javadsl.ClusterSharding;
@@ -55,7 +57,7 @@ public class PaymentConfiguration {
         ProjectionLauncher projectionLauncher = new ProjectionLauncher(system);
         projectionLauncher.withLocalProjections(paymentViewProjection.create(sourceProvider));
         return projectionLauncher;
-  }
+    }
 
     public DataSource dataSource() {
         var hikariDataSource = new HikariDataSource();

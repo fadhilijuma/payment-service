@@ -3,6 +3,7 @@ package io.wobline.payments.application.projection;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+
 import org.apache.pekko.japi.function.Function;
 import org.apache.pekko.projection.jdbc.JdbcSession;
 

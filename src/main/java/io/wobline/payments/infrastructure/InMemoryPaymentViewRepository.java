@@ -16,33 +16,33 @@ import org.apache.pekko.Done;
 
 public class InMemoryPaymentViewRepository implements PaymentViewRepository {
 
-  private ConcurrentMap<PaymentId, PaymentView> store = new ConcurrentHashMap<>();
+    private ConcurrentMap<PaymentId, PaymentView> store = new ConcurrentHashMap<>();
 
-  @Override
-  public CompletionStage<Done> save(
-      String timestamp,
-      PaymentId paymentId,
-      String cardNumber,
-      String expiryDate,
-      String cvv,
-      Double amount,
-      String currency,
-      String merchantId,
-      PaymentStatus status) {
-    return supplyAsync(
-        () -> {
-          store.put(
-              paymentId,
-              new PaymentView(
-                  paymentId.toString(),
-                  cardNumber,
-                  expiryDate,
-                  cvv,
-                  amount,
-                  currency,
-                  merchantId,
-                  status));
-          return Done.done();
-        });
-  }
+    @Override
+    public CompletionStage<Done> save(
+            String timestamp,
+            PaymentId paymentId,
+            String cardNumber,
+            String expiryDate,
+            String cvv,
+            Double amount,
+            String currency,
+            String merchantId,
+            PaymentStatus status) {
+        return supplyAsync(
+                () -> {
+                    store.put(
+                            paymentId,
+                            new PaymentView(
+                                    paymentId.toString(),
+                                    cardNumber,
+                                    expiryDate,
+                                    cvv,
+                                    amount,
+                                    currency,
+                                    merchantId,
+                                    status));
+                    return Done.done();
+                });
+    }
 }

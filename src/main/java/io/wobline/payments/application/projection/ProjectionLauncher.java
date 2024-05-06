@@ -3,10 +3,12 @@ package io.wobline.payments.application.projection;
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.wobline.payments.domain.PaymentEvent;
+
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
+
 import org.apache.pekko.Done;
 import org.apache.pekko.actor.CoordinatedShutdown;
 import org.apache.pekko.actor.typed.ActorRef;

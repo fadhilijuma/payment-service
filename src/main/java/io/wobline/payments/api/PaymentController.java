@@ -19,54 +19,54 @@ import reactor.core.publisher.Mono;
 @RequestMapping(value = "v1/payments")
 public class PaymentController {
 
-  private final PaymentService paymentService;
+    private final PaymentService paymentService;
 
-  public PaymentController(PaymentService paymentService) {
-    this.paymentService = paymentService;
-  }
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
-  @PostMapping
-  public Mono<ResponseEntity<String>> create(@RequestBody ProcessPaymentRequest request) {
-    CompletionStage<ResponseEntity<String>> paymentResponse =
-        paymentService
-            .processPayment(
-                request.cardNumber(),
-                request.expiryDate(),
-                request.cvv(),
-                request.amount(),
-                request.currency(),
-                request.merchantId())
-            .thenApply(
-                result ->
-                    switch (result) {
-                      case PaymentEntityResponse.CommandProcessed ignored ->
-                          new ResponseEntity<>("Payment Processed", CREATED);
-                      case PaymentEntityResponse.CommandRejected rejected ->
-                          transformRejection(rejected);
-                    });
+    @PostMapping
+    public Mono<ResponseEntity<String>> create(@RequestBody ProcessPaymentRequest request) {
+        CompletionStage<ResponseEntity<String>> paymentResponse =
+                paymentService
+                        .processPayment(
+                                request.cardNumber(),
+                                request.expiryDate(),
+                                request.cvv(),
+                                request.amount(),
+                                request.currency(),
+                                request.merchantId())
+                        .thenApply(
+                                result ->
+                                        switch (result) {
+                                            case PaymentEntityResponse.CommandProcessed ignored ->
+                                                    new ResponseEntity<>("Payment Processed", CREATED);
+                                            case PaymentEntityResponse.CommandRejected rejected ->
+                                                    transformRejection(rejected);
+                                        });
 
-    return Mono.fromCompletionStage(paymentResponse);
-  }
+        return Mono.fromCompletionStage(paymentResponse);
+    }
 
-  @GetMapping(value = "{paymentId}", produces = "application/json")
-  public Mono<ResponseEntity<PaymentResponse>> fetchById(@PathVariable UUID paymentId) {
-    CompletionStage<ResponseEntity<PaymentResponse>> response =
-        paymentService
-            .fetch(PaymentId.of(paymentId))
-            .thenApply(
-                result ->
-                    result
-                        .map(PaymentResponse::from)
-                        .map(ok()::body)
-                        .getOrElse(notFound().build()));
-    return Mono.fromCompletionStage(response);
-  }
+    @GetMapping(value = "{paymentId}", produces = "application/json")
+    public Mono<ResponseEntity<PaymentResponse>> fetchById(@PathVariable UUID paymentId) {
+        CompletionStage<ResponseEntity<PaymentResponse>> response =
+                paymentService
+                        .fetch(PaymentId.of(paymentId))
+                        .thenApply(
+                                result ->
+                                        result
+                                                .map(PaymentResponse::from)
+                                                .map(ok()::body)
+                                                .getOrElse(notFound().build()));
+        return Mono.fromCompletionStage(response);
+    }
 
-  private ResponseEntity<String> transformRejection(
-      PaymentEntityResponse.CommandRejected rejected) {
-    return switch (rejected.error()) {
-      case PAYMENT_ALREADY_EXISTS -> new ResponseEntity<>("Payment already created", CONFLICT);
-      default -> badRequest().body("Request failed with: " + rejected.error().name());
-    };
-  }
+    private ResponseEntity<String> transformRejection(
+            PaymentEntityResponse.CommandRejected rejected) {
+        return switch (rejected.error()) {
+            case PAYMENT_ALREADY_EXISTS -> new ResponseEntity<>("Payment already created", CONFLICT);
+            default -> badRequest().body("Request failed with: " + rejected.error().name());
+        };
+    }
 }

@@ -9,14 +9,14 @@ import org.apache.pekko.Done;
 
 public interface PaymentViewRepository {
 
-  CompletionStage<Done> save(
-      String timestamp,
-      PaymentId paymentId,
-      String cardNumber,
-      String expiryDate,
-      String cvv,
-      Double amount,
-      String currency,
-      String merchantId,
-      PaymentStatus status);
+    CompletionStage<Done> save(
+            String timestamp,
+            PaymentId paymentId,
+            String cardNumber,
+            String expiryDate,
+            String cvv,
+            Double amount,
+            String currency,
+            String merchantId,
+            PaymentStatus status);
 }

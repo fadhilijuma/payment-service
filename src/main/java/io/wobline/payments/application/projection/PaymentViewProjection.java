@@ -5,8 +5,10 @@ import static java.time.Duration.ofSeconds;
 import static org.apache.pekko.projection.HandlerRecoveryStrategy.retryAndFail;
 
 import io.wobline.payments.domain.PaymentEvent;
+
 import java.time.Duration;
 import javax.sql.DataSource;
+
 import org.apache.pekko.actor.typed.ActorSystem;
 import org.apache.pekko.persistence.query.Offset;
 import org.apache.pekko.projection.eventsourced.EventEnvelope;

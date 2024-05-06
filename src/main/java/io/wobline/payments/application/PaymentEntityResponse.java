@@ -1,6 +1,7 @@
 package io.wobline.payments.application;
 
 import io.wobline.payments.domain.PaymentCommandError;
+
 import java.io.Serializable;
 
 public sealed interface PaymentEntityResponse extends Serializable {

@@ -1,7 +1,7 @@
 # Payments Service
 <img src="https://github.com/fadhilijuma/payment-service/raw/main/funds_transfer.png" >
 
-This service links the white labeled service providers with acquirers ensuring a seamless flow of transactions. 
+This service links mercahnts with acquirers ensuring a seamless flow of transactions. 
 
 ## Running Locally 
 You have to first setup the database that is used as a journal to capture events by running this docker-compose file in development directory:
